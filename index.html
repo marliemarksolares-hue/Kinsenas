@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kinsenas</title>
+<meta name="description" content="Kinsenas payroll. Sign in with the username your company gave you.">
+<meta name="theme-color" content="#0F2440">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Kinsenas">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='12' fill='%23F4F7FA'/%3E%3Cpath d='M22 16v32M44 16L24 33l20 15' stroke='%230F2440' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+</head>
+<body style="margin:0;font:15px system-ui,sans-serif;color:#132033;background:#EBF0F5">
+<p id="tl" style="padding:24px;margin:0">Opening Kinsenas…</p>
+<noscript><p style="padding:0 24px">Kinsenas needs JavaScript. Please turn it on and reload.</p></noscript>
+<script>
+/* Kinsenas's own page. Loads Kinsenas from its Google Apps Script web app without the browser's Google sign-in, so it opens the same
+   whatever Google accounts the browser has. Only this loader lives here: the code and the data stay in Apps Script and Google Sheets.
+   Employees: add #portal to this page's address. */
+window.__KINSENAS_EXEC = "https://script.google.com/macros/s/AKfycbxEuafzoV9yfDMMB0Y3dhqJHKN_abdX3pyAtsKQcKM6i-dlf_487rVznFsIcixdEufhPQ/exec";
+(function go(n) {
+  fetch(window.__KINSENAS_EXEC, { method: "POST", credentials: "omit", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ fn: "apiAuthPage", args: [] }) })
+    .then(function (r) { return r.json(); })
+    .then(function (o) { if (!o || !o.ok || !o.v) throw new Error((o && o.e) || "no page"); document.open(); document.write(o.v); document.close(); })
+    .catch(function (e) { if (n < 2) return setTimeout(function () { go(n + 1); }, 1500 * (n + 1)); document.getElementById("tl").innerHTML = "Kinsenas could not open right now. Check the connection and <a href=\"javascript:location.reload()\">try again</a>."; });
+})(0);
+</script>
+</body>
+</html>
